@@ -5,14 +5,14 @@ using TMPro;
 
 public class Score :  MonoBehaviour
 {
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI monedaTXT;
     public int score;
 
    
     public void changeScore(int coinValue)
     {
         score += coinValue; 
-        text.text = "x" + score.ToString(); 
+        monedaTXT.text = "Monedas = " + score.ToString(); 
         
     }
 

@@ -7,25 +7,22 @@ public class Jugador : MonoBehaviour
     public int fuerzaSalto;
     public int velocidadMovimiento;
     bool piso = false;
-
-
-
     
 
-    private void OnTriggerEnter2D(Collider2D c1)
+    private void OnTriggerEnter2D(Collider2D Col)
     {
 
-        if (c1.tag == "Obstaculo" )
+        if (Col.tag == "Obstaculo" )
         {
             GameObject.Destroy(this. gameObject);
         }
-        if (c1.tag == "Piso")
+        if (Col.tag == "Piso")
         {
             piso = true;
         }
-        if (c1.gameObject.CompareTag("Coin"))
+        if (Col.gameObject.CompareTag("Coin"))
         {
-            Destroy(c1.gameObject);
+            Destroy(Col.gameObject);
         }
     }
     private void OnTriggerStay2D (Collider2D c1)
@@ -44,16 +41,18 @@ public class Jugador : MonoBehaviour
     {
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && piso)
+        if ((Input.GetKeyDown(KeyCode.Space) && piso)|| Input.GetKeyDown(KeyCode.A) && piso)
         {
-            this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, fuerzaSalto));
+            Jump();
         }
-        if (Input.GetKeyDown(KeyCode.A) && piso)
-        {
-            this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, fuerzaSalto));
-        }
+        
 
         this.GetComponent<Rigidbody2D>().velocity = new Vector2(velocidadMovimiento, this.GetComponent<Rigidbody2D>().velocity.y);
+    }
+    void Jump()
+    {
+        this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, fuerzaSalto));
+
     }
 
 }
